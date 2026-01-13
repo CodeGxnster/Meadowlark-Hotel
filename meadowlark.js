@@ -1,35 +1,58 @@
 const express = require("express")
 const colors = require("colors")
+const expressHandlebars = require("express-handlebars")
 
 const port = process.env.PORT || 2323
-
 const app = express()
 
-// custom 404 
-app.get("/", (req, res)=> {
-    res.type("text/plain")
-    res.status(200)
-    res.send("Frankelly's Meadowlark travel & Co.")
-})
+// app.get("/", (req, res)=> {
+//     res.type("text/plain")
+//     res.send("Frankelly's Meadowlark travel & Co.")
+// })
+//
+// app.get("/about", (req, res) => {
+//   res.type("text/plain")
+//   res.send("Frankelly's Meadowlark about page")
+// })
+//
+// app.use((req, res) => {
+//   res.type("text/plain")
+//   res.status(404)
+//   res.send("404 - Not found")
+// })
+//
+//
+// app.use((err, req, res, next) => {
+//   res.type("text/plain")
+//   res.status(500)
+//   res.send("Internal server Error")
+// })
+//
 
-app.get("/about", (req, res) => {
-  res.type("text/plain")
-  res.status(200)
-  res.send("Frankelly's Meadowlark about page")
-})
+
+// using handle bars
+
+
+app.engine("handlebars", expressHandlebars.engine({
+  defaultLayout: "main",
+}))
+
+app.set("view engine", "handlebars")
+
+app.get("/", (req, res) => res.render("home"))
+app.get("/about", (req, res) => res.render("about"))
 
 app.use((req, res) => {
-  res.type("text/plain")
   res.status(404)
-  res.send("404 - Not found")
+  res.render("404")
 })
-
 
 app.use((err, req, res, next) => {
-  res.type("text/plain")
+
+  console.error(err);
   res.status(500)
-  res.send("Internal server Error")
+  res.render("500")
 })
 
-
 app.listen(port, ()=> console.log("Listening on localhost:".blue + port))
+
