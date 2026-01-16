@@ -4,6 +4,59 @@
     <title>Meadowlark & Co.</title>
   </head>
   <body>
+    <style>
+/* Removes default browser spacing */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: black;
+}
+
+.navbar {
+  display: flex; /* Aligns items in a row */
+  justify-content: space-between; /* Pushes items to edges */
+  align-items: center; /* Vertically centers items */
+  padding: 1rem 2rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #332;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.navbar a:hover {
+  background-color: #0056b3;
+
+}
+  .fortune {
+  margin-top: 1rem;
+  
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Optional: Add a 'before' label */
+.fortune::before {
+  content: "ACTOR QUOTE: ";
+  font-weight: bold;
+  color: #fff;
+}
+
+    </style>
     {{{body}}}
+    <img src="/img/meadowlark-logo.png" alt="logo">
   </body>
 </html>
