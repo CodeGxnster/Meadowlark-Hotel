@@ -1,5 +1,6 @@
 const express = require("express")
 const expressHandlebars = require("express-handlebars")
+const bodyParser = require("body-parser")
 const handlers = require("./lib/handlers")
 
 const port = process.env.PORT || 2323
@@ -10,10 +11,16 @@ app.engine("handlebars", expressHandlebars.engine({
 }))
 
 app.set("view engine", "handlebars")
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(__dirname + "/public"))
 
 app.get("/", handlers.home)
 app.get("/about", handlers.about)
+
+app.get("/newsletter", handlers.newsletterSingUp) 
+app.post("/newsletter-signup/process", handlers.newsletterProcessing)
+app.get("/newsletter/thank-you", handlers.newsletterThankYou)
+
 
 app.use(handlers.notFound)
 app.use(handlers.internalError)
