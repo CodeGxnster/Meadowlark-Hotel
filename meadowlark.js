@@ -11,15 +11,16 @@ app.engine("handlebars", expressHandlebars.engine({
 }))
 
 app.set("view engine", "handlebars")
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(__dirname + "/public"))
+
 
 app.get("/", handlers.home)
 app.get("/about", handlers.about)
 
 app.get("/newsletter", handlers.newsletterSingUp) 
-app.post("/newsletter-signup/process", handlers.newsletterProcessing)
-app.get("/newsletter/thank-you", handlers.newsletterThankYou)
+app.post("/api/newsletter-signup", handlers.newsletterProcessingFetch)
 
 
 app.use(handlers.notFound)
