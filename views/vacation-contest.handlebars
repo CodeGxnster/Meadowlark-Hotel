@@ -3,9 +3,8 @@
   <a href="/" data-test-id="about">Go Home</a>
 </header>
 <h2>Vacation Photo Contest</h2>
-<form class="form-horizontal" role="form" enctype="multipart/form-data" method="POST"
- action="/contest/vacation-photo/{{year}}/{{month}}">
-
+<div id="form-container">
+<form class="form-horizontal" role="form" enctype="multipart/form-data" id="main-form"> 
   <input type="hidden" name="_csrf" value="{{csrf}}">
   <div class="form-group">
     <label for="fieldName" class="col-sm-2 controllabel">Name</label>
@@ -31,3 +30,25 @@
  </div>
  </div>
 </form>
+<script>
+ document.getElementById("main-form").addEventListener("submit", (evt) => {
+   evt.preventDefault()
+   const body = new FormData(evt.target)
+   const container = document.getElementById("form-container")
+   const url = "/contest/vacation-photo/{{year}}/{{month}}"
+   
+   fetch(url, {method: "post", body})
+    .then(resp => {
+       if(resp.status < 200 || resp.status >= 300) throw new Error(`Error with the request ${resp.status}` )
+       return resp.json()
+     })
+   .then(json => {
+       container.innerHTML = `<h1 style="color: white;">${json.result}</h1>`
+     })
+   .catch(err => {
+       container.innerHTML =  `<h1 style="color: red;">There was an error and a very bad one<h1>`
+     })
+    
+ }) 
+ </script>
+</div>

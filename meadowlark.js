@@ -32,11 +32,10 @@ app.post("/api/newsletter-signup", handlers.newsletterProcessingFetch)
 app.get("/vacation-contest", handlers.vacationContest)
 app.post("/contest/vacation-photo/:year/:month", upload.single("photo"), (req, res)=> {
 
-  handlers.vacationPhotos(req, res) 
+  handlers.vacationPhotosFetch(req, res) 
   
 })
 
-app.get("/contest/thank-You", handlers.constestThankYou)
 
 app.use(handlers.notFound)
 app.use(handlers.internalError)
