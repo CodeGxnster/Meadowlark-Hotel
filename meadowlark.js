@@ -1,6 +1,9 @@
 const express = require("express")
 const expressHandlebars = require("express-handlebars")
-const bodyParser = require("body-parser")
+
+const multer = require("multer")
+const upload = multer({dest: __dirname + "/public/img"})
+
 const handlers = require("./lib/handlers")
 
 const port = process.env.PORT || 2323
@@ -11,9 +14,13 @@ app.engine("handlebars", expressHandlebars.engine({
 }))
 
 app.set("view engine", "handlebars")
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(__dirname + "/public"))
+
+
+// body-parser
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
 
 app.get("/", handlers.home)
@@ -22,6 +29,14 @@ app.get("/about", handlers.about)
 app.get("/newsletter", handlers.newsletterSingUp) 
 app.post("/api/newsletter-signup", handlers.newsletterProcessingFetch)
 
+app.get("/vacation-contest", handlers.vacationContest)
+app.post("/contest/vacation-photo/:year/:month", upload.single("photo"), (req, res)=> {
+
+  handlers.vacationPhotos(req, res) 
+  
+})
+
+app.get("/contest/thank-You", handlers.constestThankYou)
 
 app.use(handlers.notFound)
 app.use(handlers.internalError)
