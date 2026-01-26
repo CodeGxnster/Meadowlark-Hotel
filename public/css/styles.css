@@ -284,7 +284,7 @@ body {
 }
 
 /* Drop Zone */
-.drop-zone {
+.drop-zone-content {
   border: 2px dashed #cbd5e0;
   border-radius: 12px;
   padding: 3rem 1rem;
@@ -292,20 +292,21 @@ body {
   background: var(--sea-glass);
   transition: all 0.3s ease;
   cursor: pointer;
+  margin: auto;
 }
 
-.drop-zone:hover {
+.drop-zone-content:hover {
   border-color: var(--primary-gold);
   background: #f0f7f8;
 }
 
-.drop-zone-content p {
+.drop-zone-content label {
   font-size: 0.9rem;
   color: #718096;
   margin-top: 1rem;
 }
 
-.drop-zone-content span {
+.drop-zone-content input{
   color: var(--primary-gold);
   font-weight: 600;
   text-decoration: underline;

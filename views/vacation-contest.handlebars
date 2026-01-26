@@ -1,4 +1,4 @@
-<<section class="contest-view">
+<section class="contest-view">
   <div class="contest-header">
     <h2>Show Us Your Meadowlark</h2>
     <p>Share your favorite moment from your stay in La Romana and win a 3-night luxury escape.</p>
@@ -6,18 +6,16 @@
 
   <div class="upload-container">
     <form class="upload-form" id="upload-form">
-      <div class="drop-zone" id="drop-zone">
         <div class="drop-zone-content">
-          <svg class="upload-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-          <p>Drag and drop your high-res photo or <span>browse files</span></p>
-          <input type="file" id="photo-upload" hidden accept="image/*">
+          <label for="photo">Click here to upload your photo</label>
+          <input type="file" name="photo" id="photo" hidden accept="image/*">
         </div>
       </div>
 
       <div class="form-details">
         <div class="form-group">
           <label for="photo-caption">Story behind the photo</label>
-          <textarea id="photo-caption" placeholder="Tell us about this moment..." rows="4"></textarea>
+          <textarea id="photo-caption" name="opinion" placeholder="Tell us about this moment..." rows="4"></textarea>
         </div>
         
         <div class="checkbox-group">
@@ -31,7 +29,7 @@
   </div>
 </section>
 <script>
- document.getElementById("main-form").addEventListener("submit", (evt) => {
+ document.getElementById("upload-form").addEventListener("submit", (evt) => {
    evt.preventDefault()
    const body = new FormData(evt.target)
    const url = "/contest/vacation-photo/{{year}}/{{month}}"
