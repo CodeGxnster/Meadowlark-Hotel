@@ -2,8 +2,13 @@ const express = require("express")
 const expressHandlebars = require("express-handlebars")
 const expressSession = require("express-session")
 
+// Multipart form data
 const multer = require("multer")
 const upload = multer({dest: __dirname + "/public/img"})
+
+// logs 
+const morgan = require("morgan")
+const fileSys = require("fs")
 
 const handlers = require("./lib/handlers")
 
@@ -14,7 +19,15 @@ const { credentials } = require("./config")
 
 const flashMiddleware = require("./lib/middleware/flash.js")
 
-
+switch(app.get('env')) {
+  case "development":
+    app.use(morgan('dev'))
+    break
+  case "production":
+    const stream = fileSys.createWriteStream(__dirname + "/.access.log", {flags: "a"}) 
+    app.use(morgan("combined", { stream }))
+    break
+}
 
 
 
@@ -52,9 +65,9 @@ app.post("/api/newsletter-signup", handlers.newsletterProcessingFetch)
 
 app.get("/vacation-contest", handlers.vacationContest)
 
-app.post("/contest/vacation-photo/:year/:month", upload.single("photo"), (req, res)=> {
+app.post("/api/vacation-photo/:year/:month", upload.single("photo"), (req, res)=> {
 
-handlers.vacationPhotosFetch(req, res) 
+handlers.vacationPhotoHandler(req, res) 
   
 })
 
@@ -62,5 +75,5 @@ handlers.vacationPhotosFetch(req, res)
 app.use(handlers.notFound)
 app.use(handlers.internalError)
 
-app.listen(port, ()=> console.log("Listening on localhost:" + port))
+app.listen(port, ()=> console.log(`Listening on enviroment ${app.get('env')} localhost:` + port))
 

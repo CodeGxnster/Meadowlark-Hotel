@@ -16,6 +16,10 @@
         <div class="form-group">
           <label for="photo-caption">Story behind the photo</label>
           <textarea id="photo-caption" name="opinion" placeholder="Tell us about this moment..." rows="4"></textarea>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="example@example.com">
         </div>
         
         <div class="checkbox-group">
@@ -31,9 +35,10 @@
 <script>
  document.getElementById("upload-form").addEventListener("submit", (evt) => {
    evt.preventDefault()
+   const container = document.getElementById("upload-container")
    const body = new FormData(evt.target)
-   const url = "/contest/vacation-photo/{{year}}/{{month}}"
-   
+   const url = "/api/vacation-photo/{{year}}/{{month}}"
+    
    fetch(url, {method: "post", body})
     .then(resp => {
        return resp.json()
