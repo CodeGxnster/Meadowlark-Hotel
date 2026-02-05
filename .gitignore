@@ -1,9 +1,9 @@
 # packges by npm
 
 node_modules
-.credentials.production.json
-.credentials.development.json
-.credentials.*
+*.credentials.production.json
+*.credentials.development.json
+*.credentials.*
 *.log
 # put any other files you don't want to check in here, such
 # as .DS_Store
