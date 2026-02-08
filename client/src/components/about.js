@@ -1,0 +1,24 @@
+import { Link } from "react-router-dom"
+
+export default function About() {
+  return (
+
+<section className="about-section">
+  <div className="about-container">
+    <div className="about-image">
+      <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format\&fit=crop\&q=80\&w=800" alt="Meadowlark Terrace"/>
+    </div>
+    <div className="about-text">
+      <h2>Heritage & Horizon</h2>
+      <p>Founded on the shores of La Romana, Meadowlark was born from a desire to blend the vibrant Dominican spirit with refined architectural elegance.</p>
+      <p>Whether you're here for the world-renowned golf courses nearby or to disappear into the sound of the Caribbean waves, we provide a sanctuary that feels less like a hotel and more like a coastal home.</p>
+      <ul className="about-highlights">
+        <li>Established 1998</li>
+        <li>100% Locally Sourced Gastronomy</li>
+        <li>Private Beach Access</li>
+      </ul>
+    </div>
+  </div>
+</section>
+  )
+}

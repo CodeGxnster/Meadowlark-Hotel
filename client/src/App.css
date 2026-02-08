@@ -1,3 +1,5 @@
+
+
 /* Removes default browser spacing */
 body {
   margin: 0;
@@ -13,11 +15,10 @@ body {
   background-color: #f8f9fa;
   border-bottom: 1px solid #e0e0e0;
 }
-
 .navbar h1 {
   font-size: 1.5rem;
   margin: 0;
-  color: #332;
+  color: #c5a059
 }
 
 .navbar a {
@@ -687,7 +688,76 @@ body {
   color: #b38f4a;
   text-decoration: underline;
 }
+/* Not found */
+.error-page {
+  height: 90vh; /* Takes up most of the screen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--sea-glass); /* Using your light coastal blue */
+  text-align: center;
+  padding: 20px;
+}
 
+.error-content {
+  max-width: 500px;
+}
+
+.error-code {
+  font-size: 8rem;
+  font-weight: 800;
+  color: var(--primary-gold); /* Using your luxury gold accent */
+  line-height: 1;
+  display: block;
+  opacity: 0.3; /* Subtle, large numbers in the background */
+  margin-bottom: -2rem;
+}
+
+.error-content h1 {
+  font-size: 2.5rem;
+  color: var(--deep-navy);
+  margin-bottom: 1rem;
+}
+
+.error-content p {
+  color: #555;
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Reusing your existing button styles for consistency */
+.error-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background-color: var(--primary-gold);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: opacity 0.3s;
+}
+
+.btn-secondary {
+  border: 2px solid var(--accent-blue);
+  color: var(--accent-blue);
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: var(--accent-blue);
+  color: white;
+}
 /* Make the button full width on small screens */
 @media (max-width: 768px) {
   .form-horizontal {
@@ -704,3 +774,6 @@ body {
   }
 }
    
+  
+
+
