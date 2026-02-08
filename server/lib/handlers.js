@@ -84,7 +84,7 @@ const db = require("./../db")
 exports.listVacations = async (req, res) => {
 
   const vacations = await db.getVacations()
-  const context = {
+  const vacationsData = {
     vacations: vacations.map( vacation => ({
       name: vacation.name,
       sku: vacation.sku,
@@ -93,7 +93,7 @@ exports.listVacations = async (req, res) => {
       inSeason: vacation.inSeason
     }))
   }
-  res.render("vacations", context)
+  res.json(vacationsData.vacations)
 }
 
 exports.notifyMeWISform = (req, res) => { 

@@ -27,8 +27,19 @@ db.once("open", () => {
 module.exports = {
  
   getVacations: async (options = {}) => {
+      return Vacation.find(options)
 
-    return Vacation.find(options)
+
+ },
+  addVacationInSeasonListener: async (email, sku) => {
+    await VacationListener.updateOne(
+      { email },
+      { $push: { sku: sku }},
+      { upsert: true }
+    ) 
+  }
+}
+
 
 // A mock of what we have on the db
 //   const vacations = [
@@ -57,87 +68,76 @@ module.exports = {
 //
 //     return vacations
 
- },
-  addVacationInSeasonListener: async (email, sku) => {
-    await VacationListener.updateOne(
-      { email },
-      { $push: { sku: sku }},
-      { upsert: true }
-    ) 
-  }
-}
+// How to add vacations
 
-
-
-
-async function addVacations() {
-
-  try {
-
-    const vacations = await Vacation.find() 
-    if(vacations.length) return
-
-    await new Vacation({
-      name: 'Hood River Day Trip',
-      slug: 'hood-river-day-trip',
-      category: 'Day Trip',
-      sku: 'HR199',
-      description: 'Spend a day sailing on the Columbia and ' + 'enjoying craft beers in Hood River!',
-      location: {
-        search: 'Hood River, Oregon, USA',
-      },
-      price: 99.95,
-      tags: ['day trip', 'hood river', 'sailing',
-        'windsurfing', 'breweries'],
-      inSeason: true,
-      maximumGuests: 16,
-      available: true,
-      packagesSold: 0,
-    }).save()
-
-    await new Vacation({
-      name: 'Oregon Coast Getaway',
-      slug: 'oregon-coast-getaway',
-      category: 'Weekend Getaway',
-      sku: 'OC39',
-      description: 'Enjoy the ocean air and quaint coastal towns!',
-      location: {
-        search: 'Cannon Beach, Oregon, USA',
-      },
-      price: 269.95,
-      tags: ['weekend getaway', 'oregon coast',
-        'beachcombing'],
-      inSeason: false,
-      maximumGuests: 8,
-      available: true,
-      packagesSold: 0,
-    }).save()
-
-    await new Vacation({
-      name: 'Rock Climbing in Bend',
-      slug: 'rock-climbing-in-bend',
-      category: 'Adventure',
-      sku: 'B99',
-      description: 'Experience the thrill of climbing in the high desert.',
-      location: {
-        search: 'Bend, Oregon, USA',
-      },
-      price: 289.95,
-      tags: ['weekend getaway', 'bend', 'high desert', 'rockclimbing'],
-      inSeason: true,
-      requiresWaiver: true,
-      maximumGuests: 4,
-      available: false,
-      packagesSold: 0,
-      notes: 'The tour guide is currently recovering from askiing accident.',
-    }).save()
-
-  } catch(err){
-
-    console.error(err)
-  }
-}
-
-
+// async function addVacations() {
+//
+//   try {
+//
+//     const vacations = await Vacation.find() 
+//     if(vacations.length) return
+//
+//     await new Vacation({
+//       name: 'Hood River Day Trip',
+//       slug: 'hood-river-day-trip',
+//       category: 'Day Trip',
+//       sku: 'HR199',
+//       description: 'Spend a day sailing on the Columbia and ' + 'enjoying craft beers in Hood River!',
+//       location: {
+//         search: 'Hood River, Oregon, USA',
+//       },
+//       price: 99.95,
+//       tags: ['day trip', 'hood river', 'sailing',
+//         'windsurfing', 'breweries'],
+//       inSeason: true,
+//       maximumGuests: 16,
+//       available: true,
+//       packagesSold: 0,
+//     }).save()
+//
+//     await new Vacation({
+//       name: 'Oregon Coast Getaway',
+//       slug: 'oregon-coast-getaway',
+//       category: 'Weekend Getaway',
+//       sku: 'OC39',
+//       description: 'Enjoy the ocean air and quaint coastal towns!',
+//       location: {
+//         search: 'Cannon Beach, Oregon, USA',
+//       },
+//       price: 269.95,
+//       tags: ['weekend getaway', 'oregon coast',
+//         'beachcombing'],
+//       inSeason: false,
+//       maximumGuests: 8,
+//       available: true,
+//       packagesSold: 0,
+//     }).save()
+//
+//     await new Vacation({
+//       name: 'Rock Climbing in Bend',
+//       slug: 'rock-climbing-in-bend',
+//       category: 'Adventure',
+//       sku: 'B99',
+//       description: 'Experience the thrill of climbing in the high desert.',
+//       location: {
+//         search: 'Bend, Oregon, USA',
+//       },
+//       price: 289.95,
+//       tags: ['weekend getaway', 'bend', 'high desert', 'rockclimbing'],
+//       inSeason: true,
+//       requiresWaiver: true,
+//       maximumGuests: 4,
+//       available: false,
+//       packagesSold: 0,
+//       notes: 'The tour guide is currently recovering from askiing accident.',
+//     }).save()
+//
+//   } catch(err){
+//
+//     console.error(err)
+//   }
+// }
+//
+//
 // addVacations()
 

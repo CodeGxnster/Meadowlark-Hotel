@@ -15,6 +15,7 @@ const fileSys = require("fs")
 const pathUtils = require("path")
 
 const handlers = require("./lib/handlers")
+const { warn } = require("console")
 
 const port = process.env.PORT || 2323
 const app = express()
@@ -34,7 +35,7 @@ switch(app.get('env')) {
 
 // view engine conf 
 
-app.use(express.static(pathUtils.join(__dirname, '../client/build')))
+// app.use(express.static(pathUtils.join(__dirname, '../client/build')))
 
 
 
@@ -43,8 +44,9 @@ app.use(express.static(pathUtils.join(__dirname, '../client/build')))
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-// parsers middleware
 
+
+app.get("/api/vacations", handlers.listVacations)
 
 app.post("/api/newsletter-signup", handlers.newsletterProcessingFetch)
 

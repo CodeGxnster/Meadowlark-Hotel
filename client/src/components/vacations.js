@@ -1,16 +1,22 @@
-import react, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 
 export default function Vacations() {
   const [vacations, setVacations] = useState([])
+  
+  useEffect(() => {
+    fetch("/api/vacations")
+      .then(resp => resp.json())
+      .then(setVacations)
+  }, [])
 
   return (
   <>
     <h1>Vacations</h1>
     <div className="vacation">
       {
-      vacations.map(vacation => 
+      vacations.map(vacation =>  
           <div key={vacation.sku}>
               <h2>{vacation.name}</h2>
               <p>{vacation.description}</p>
